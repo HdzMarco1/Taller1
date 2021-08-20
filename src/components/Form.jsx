@@ -13,13 +13,14 @@ const Form = () => {
     const handleChange = e => setTodo({[e.target.name]: e.target.value})
     const elNumero = e => enviarNumero({...todo,[e.target.name]: e.target.value})
     const handleClick = e => {
-        if(e.state.Todo === '' || e.state.numero === ''){
-            
-            return  alert('el campo no puede estar vacio')
+        if(Object.values(todo).length === 0 || Object.values(numero).length === 0 || todo.todo.trim() === ''){
+            return  alert('los campos no puede estar vacios');
+        }else if(numero.numero <= 0){
+            return alert('el campo cantidad no puede ser 0');
         }else{
-        //console.log(todo);
-        //console.log(numero);
-        setTodos([...todos, numero])
+            //console.log(todo);
+            console.log(numero);
+            setTodos([...todos, numero])
         }
 
     }
@@ -32,8 +33,8 @@ const Form = () => {
         <>
         <form onSubmit={e => e.preventDefault()}>
             <label>Agregar tarea</label><br />
-            <input type="text" name="todo" onChange={handleChange} />
-            <input type="number" name="numero" onChange={elNumero} />
+            <input type="text" name="todo" placeholder="tipo de objeto" onChange={handleChange} required/>
+            <input type="number" name="numero" placeholder="cantidad" onChange={elNumero} required/>
             <button onClick={handleClick}>agregar</button>
         </form>
         {
