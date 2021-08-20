@@ -1,9 +1,9 @@
 import React from 'react'
-const Todo = ({todo, index, deleteTodo}) => {
+const Todo = ({todo, numero, index, deleteTodo}) => {
     return (
         <>
             <div>
-                <h3>{todo}</h3>
+                <h3>{numero} - {todo}</h3>
                 <button className="btn-delete" onClick={()=> deleteTodo(index)}>x</button>
             </div>
         </>
