@@ -20,14 +20,14 @@ const Form = () => {
         }
     ]
     
-    //const [selected, setSelected] = useState({})
+
 
     const rederPrice =() => {
         console.log(todos)
         let suma = 0;
         todos.forEach(valor => suma += valor.cantidad*valor.precio);
         return(
-            <div>{suma}</div>
+            <div>{suma.toFixed(2)}</div>
         )
     }
     
@@ -39,10 +39,19 @@ const Form = () => {
         // {todo: 'todo 2'},
         // {todo: 'todo 3'}
     ])
-    const handleChange = e => setTodo(
-        {[e.target.name]: e.target.options[e.target.selectedIndex].text, precio: e.target.value},
-        console.log(e.target.value))
-  
+
+
+    const handleChange = e => {
+        let objeto = prueba[e];
+        console.log(objeto);
+        setTodo(objeto);
+    }
+       
+    const editTodo = (cantidad,index) => {
+        const newTodos = [...todos];
+        newTodos.map((x,k) => x.cantidad = k === index ? cantidad : x.cantidad);
+        setTodos(newTodos);
+      }
 
     const handleClick = e => {
             //console.log(todo);
@@ -58,10 +67,10 @@ const Form = () => {
         <>
         <form onSubmit={e => e.preventDefault()}>
             <label>Lista de compras</label><br />
-            <select name="todo" onChange={handleChange} id="nombre" required>
+            <select name="todo" onChange={ (e) => handleChange(e.target.value) } id="nombre" required>
                 {
                     prueba.map((item, i)=>(
-                        <option key={i} value={item}>{item.nombre} ${item.precio}</option>
+                        <option key={i} value={i}>{item.nombre} ${item.precio}</option>
                     ))
                 }
             </select>
@@ -69,7 +78,7 @@ const Form = () => {
         </form>
         {
             todos.map((value, index) => (
-                <Todo todo={value.todo} precio={value.precio} key={index} index={index} deleteTodo={deleteTodo} />
+                <Todo todo={value} key={index} index={index} deleteTodo={deleteTodo} editTodo={editTodo}/>
             ))
             
         }
