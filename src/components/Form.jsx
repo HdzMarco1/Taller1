@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import Todo from '../components/Todo';
+import "bootstrap/dist/css/bootstrap.min.css"
 const Form = () => {
 
     const prueba =[
@@ -23,11 +24,11 @@ const Form = () => {
 
 
     const rederPrice =() => {
-        console.log(todos)
+        //console.log(todos)
         let suma = 0;
         todos.forEach(valor => suma += valor.cantidad*valor.precio);
         return(
-            <div>{suma.toFixed(2)}</div>
+            <div class="container" id="total">Total: ${suma.toFixed(2)}</div>
         )
     }
     
@@ -43,8 +44,12 @@ const Form = () => {
 
     const handleChange = e => {
         let objeto = prueba[e];
-        console.log(objeto);
-        setTodo(objeto);
+        if(objeto === undefined){
+            alert("seleccione una obcion valida")
+        }else{
+            console.log(objeto);
+            setTodo(objeto);
+        }
     }
        
     const editTodo = (cantidad,index) => {
@@ -54,7 +59,7 @@ const Form = () => {
       }
 
     const handleClick = e => {
-            //console.log(todo);
+            //console.log(todo); 
             setTodos([...todos, todo]);
             //console.log(todo);
     }
@@ -65,23 +70,35 @@ const Form = () => {
     }
     return (
         <>
-        <form onSubmit={e => e.preventDefault()}>
-            <label>Lista de compras</label><br />
-            <select name="todo" onChange={ (e) => handleChange(e.target.value) } id="nombre" required>
+        <div class="container">
+            <form onSubmit={e => e.preventDefault()} >
+                <label>Lista de compras</label><br />
+                <select name="todo" onChange={ (e) => handleChange(e.target.value) } class="form-select" aria-label="Default select example"  id="select"  required>
+                    <option value={-1}>Seleccione una Opcion</option>
+                    {
+                        prueba.map((item, i)=>(
+                            <option key={i} value={i}>{item.nombre} ${item.precio}</option>
+                        ))
+                    }
+                </select>
+                <button onClick={handleClick} class="btn btn-primary" id="boton">agregar</button>
+            </form>
+        </div>
+
+        <table class="table table-striped table-hover" id="tabla">
+        <tbody>
+            <tr>
                 {
-                    prueba.map((item, i)=>(
-                        <option key={i} value={i}>{item.nombre} ${item.precio}</option>
+                    todos.map((value, index) => (
+                    <Todo todo={value} key={index} index={index} deleteTodo={deleteTodo} editTodo={editTodo}/>
                     ))
-                }
-            </select>
-            <button onClick={handleClick}>agregar</button>
-        </form>
-        {
-            todos.map((value, index) => (
-                <Todo todo={value} key={index} index={index} deleteTodo={deleteTodo} editTodo={editTodo}/>
-            ))
+                        
+                } 
             
-        }
+            </tr>
+        </tbody>
+        <hr />
+        </table>
          {rederPrice()}  
         </>
     )
