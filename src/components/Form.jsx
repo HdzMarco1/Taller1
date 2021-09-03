@@ -18,6 +18,41 @@ const Form = () => {
             nombre: "sandia",
             precio: 0.80,
             cantidad: 1
+        },  
+        {
+            nombre: "uvas",
+            precio: 1.50,
+            cantidad: 1
+        },  
+        {
+            nombre: "coca cola",
+            precio: 0.40,
+            cantidad: 1
+        },  
+        {
+            nombre: "maruchan",
+            precio: 0.75,
+            cantidad: 1
+        },  
+        {
+            nombre: "negrito bimbo",
+            precio: 0.25,
+            cantidad: 1
+        },  
+        {
+            nombre: "tres leches",
+            precio: 1.0,
+            cantidad: 1
+        },  
+        {
+            nombre: "cafe",
+            precio: 0.25,
+            cantidad: 1
+        },  
+        {
+            nombre: "agua",
+            precio: 0.75,
+            cantidad: 1
         }
     ]
     
